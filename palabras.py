@@ -12,7 +12,7 @@ def procesar_linea(archivo):
     return linea
 
 diccionario = {}
-numero_archivo = -1
+numero_archivo = 1
 
 for nombre_archivo in os.listdir(CARPETA_ARCHIVOS):
     with open(os.path.join(CARPETA_ARCHIVOS, nombre_archivo)) as archivo:

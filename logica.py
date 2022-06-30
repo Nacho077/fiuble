@@ -1,5 +1,5 @@
 import random
-import utils
+import utiles
 import time
 import math
 
@@ -35,7 +35,7 @@ def procesar_intento(palabra_adivinar, arriesgo):
 
 def cambiar_color(texto, color):
     # Creador: Gimenez Ignacio
-    return (utils.obtener_color(color) + texto + utils.obtener_color("Defecto")) if texto != "" else ""
+    return (utiles.obtener_color(color) + texto + utiles.obtener_color("Defecto")) if texto != "" else ""
 
 def mostrar_letras_adivinadas(palabra, adivinado):
     # Muesta las letras advinadas
@@ -82,7 +82,7 @@ def pedir_arriesgo(jugador):
     if jugador["nombre"] != "":
         print("Es el turno de " + cambiar_color(jugador["nombre"], jugador["color"]))
     while not arriesgo_valido:
-        arriesgo = normalize(input("Arriesgo: "))
+        arriesgo = normalizar_palabra(input("Arriesgo: "))
         if validar_arriesgo(arriesgo):
             arriesgo_valido = True
     
@@ -152,9 +152,9 @@ def validar_arriesgo(arriesgo):
     
     return valido
 
-def normalize(s):
-    s = s.upper()
-    replacements = (
+def normalizar_palabra(palabra):
+    palabra = palabra.upper()
+    letras_reemplazar = (
         ("Á", "A"),
         ("É", "E"),
         ("Í", "I"),
@@ -166,14 +166,15 @@ def normalize(s):
         ("Ò", "O"),
         ("Ù", "U"),
     )
-    for a, b in replacements:
-        s = s.replace(a, b)
 
-    return s
+    for letra_acentuada, letra_sin_acento in letras_reemplazar:
+        palabra = palabra.replace(letra_acentuada, letra_sin_acento)
+
+    return palabra
 
 def conseguir_palabra_adivinar():
     # Creador: Bogarin Juan
-    arr = utils.obtener_palabras_validas()
+    arr = utiles.obtener_palabras_validas()
     return arr[round(random.random() * len(arr))].upper()
 
 def conseguir_datos_iniciales():

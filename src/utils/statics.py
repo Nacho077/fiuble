@@ -1,6 +1,6 @@
-USERS_FILE = "../files/users.csv"
-SETTINGS_FILE = "../files/settings.csv"
-SCORES_FILE = "../files/scores.csv"
+USERS_FILE = "./files/users.csv"
+SETTINGS_FILE = "./files/settings.csv"
+SCORES_FILE = "./files/scores.csv"
 
 LETTERS_TO_NORMALIZE = (
     ("Á", "A"),

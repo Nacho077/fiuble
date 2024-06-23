@@ -1,8 +1,8 @@
-from src.game_modes.game import Game
-from src.game_modes.console import *
-from src.utils import *
-from src.repositories import *
-from src.utils.statics import SETTINGS_FILE, USERS_FILE, SCORES_FILE
+from game_modes.game import Game
+from game_modes.console import *
+from utils import *
+from repositories import *
+from utils.statics import SETTINGS_FILE, USERS_FILE, SCORES_FILE
 
 def select_game_mode() -> Game:
     settingsRepository = SettingsRepository(SETTINGS_FILE)
@@ -22,9 +22,12 @@ def select_game_mode() -> Game:
 
     return game_modes[quantity_players](settingsRepository, usersRepository, scoresRepository)
 
-if __name__ == "__main__":
+def main():
     try:
         game = select_game_mode()
         game.start_game()
     except Exception as exception:
        print("END GAME", exception)
+
+if __name__ == '__main__':
+    main()

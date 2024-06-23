@@ -1,0 +1,17 @@
+SECRET_WORD_LENGTH = "Secret word length"
+MAX_NUM_GAMES = "max num of games"
+RESET_POINTS_FILE = "Reset game points file"
+
+SETTINGS = [SECRET_WORD_LENGTH, MAX_NUM_GAMES, RESET_POINTS_FILE]
+
+SETTINGS_DEFAULT = {
+    SECRET_WORD_LENGTH: 5,
+    MAX_NUM_GAMES: 5,
+    RESET_POINTS_FILE: False
+}
+
+CAST_FUNCTIONS = {
+    SECRET_WORD_LENGTH: int,
+    MAX_NUM_GAMES: int,
+    RESET_POINTS_FILE: lambda val: val.upper() == 'TRUE'
+}

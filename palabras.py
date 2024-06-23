@@ -1,8 +1,6 @@
+from constantes import CARPETA_ARCHIVOS
 import os
 import re
-import logica
-
-CARPETA_ARCHIVOS = "./textos"
 
 def procesar_linea(archivo):
     # Función para obtener las palabras de una linea de un archivo
@@ -13,7 +11,18 @@ def procesar_linea(archivo):
     
     return linea
 
-def obtener_palabras_desde_archivos(cantidad_letras_palabras):
+def obtener_palabras_ordenadas(cantidad_letras_palabras, normalizar_palabra):
+    # Funcion para obtener todas las palabras candidatas
+    # Creador: Gimenez Ignacio
+    dicc_palabras = obtener_palabras_desde_archivos(cantidad_letras_palabras, normalizar_palabra)
+
+    lista_palabras = sorted(list(dicc_palabras.keys()))
+
+    escribir_archivo_posibles_palabras(dicc_palabras, lista_palabras)
+
+    return lista_palabras
+
+def obtener_palabras_desde_archivos(cantidad_letras_palabras, normalizar_palabra):
     # Función para obtener todas las palabras de x cantidad de letras
     # Creador: Gimenez Ignacio
     diccionario = {}
@@ -26,7 +35,7 @@ def obtener_palabras_desde_archivos(cantidad_letras_palabras):
 
             while linea != "":
                 for palabra in linea:
-                    palabra = logica.normalizar_palabra(palabra)
+                    palabra = normalizar_palabra(palabra)
                     if len(palabra) == cantidad_letras_palabras:
                         diccionario.setdefault(palabra, [0, 0, 0])
                         diccionario[palabra][numero_archivo] += 1
@@ -34,11 +43,9 @@ def obtener_palabras_desde_archivos(cantidad_letras_palabras):
 
     return diccionario
 
-def escribir_archivo_posibles_palabras(diccionario_palabras):
+def escribir_archivo_posibles_palabras(diccionario_palabras, palabras):
     # Función para guardar las palabras dentro del archivo "palabras.csv" en orden alfabetico
     # Creador: Gimenez Ignacio
-    palabras = sorted(list(diccionario_palabras.keys()))
-
     with open("palabras.csv", "w") as archivo:
         for palabra in palabras:
             archivo.write("{},{},{},{}\n".format(palabra, diccionario_palabras[palabra][0], diccionario_palabras[palabra][1], diccionario_palabras[palabra][2]))
